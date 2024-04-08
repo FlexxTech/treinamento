@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    .btn-editar {
+        display: inline-block;
+        background: linear-gradient(to right, #3f0a0a, #f50606);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        margin: 0 10px;
+    }
+
+    .btn-editar:hover {
+        background: linear-gradient(to right, #f50606, #3f0a0a);
+        color: #fff;
+    }
+
+    .title {
+        text-align: center;
+    }
+</style>
+<h2 class="title">Cursos Disponíveis</h2>
+<div class="car-grid">
+    {% if cursos %}
+    {% for curso in cursos %}
+    <div class="car-card">
+        <a href="{% url 'curso_detail' curso.pk %}" style="text-decoration: none;color: rgb(92, 67, 83);">
+            {% if curso.photo %}
+            <img src="{{ curso.photo.url }}" enctype="multipart/form-data">
+            {% else %}
+            <img src="{% static 'img/no-photo.png' %}" enctype="multipart/form-data">
+            {% endif %}
+            <h3>{{ curso.nome }}</h3>
+        </a>
+        <a href="{% url 'curso_update' pk=curso.pk %}" class="btn-editar" style="text-decoration: none;">Editar</a>
+
+        <a href="{% url 'curso_delete' pk=curso.pk %}" class="btn-editar" style="text-decoration: none;">Deletar</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Nenhum curso disponível no momento.</p>
+    {% endif %}
+</div>
+{% endblock %}

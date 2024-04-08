@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    h1 {
+        text-align: center;
+        color: rgb(255, 0, 0);
+    }
+
+    .aluno-box {
+        border: 1px solid #ccc;
+        /* Adiciona uma borda */
+        border-radius: 8px;
+        /* Adiciona bordas arredondadas */
+        padding: 15px;
+        /* Adiciona espaço interno */
+        margin-bottom: 20px;
+        /* Adiciona espaço entre cada aluno */
+        overflow: hidden;
+        /* Esconde o overflow */
+    }
+
+    .aluno-info {
+        float: left;
+        /* Alinha as informações do aluno à esquerda */
+    }
+
+    .btn-editar {
+        float: right;
+        margin-left: 10px;
+        /* Alinha o botão "Editar" à direita */
+        text-decoration: none;
+        color: white;
+        background: linear-gradient(to right, #f50606, #3f0a0a);
+        padding: 8px 12px;
+        /* Ajuste o tamanho do botão aqui */
+        font-size: 12px;
+        /* Ajuste o tamanho da fonte do botão */
+        border-radius: 6px;
+        /* Torna o botão mais redondo */
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-editar:hover {
+        background: linear-gradient(to right, #3f0a0a, #f50606);
+        color: white;
+    }
+</style>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1> {{ curso.nome }} </h1>
+    <h2>Alunos Matriculados:</h2>
+    <ul class="alunos-list">
+        {% for aluno in alunos %}
+        <li class="aluno-box">
+            <div class="aluno-info">
+                {{ aluno.name }} - {{ aluno.cpf }} - {{ aluno.email }}
+            </div>
+            <a href="{% url 'aluno_update' pk=aluno.pk %}" class="btn-editar">Editar</a>
+
+            <a href="{% url 'aluno_delete' pk=aluno.pk %}" class="btn-editar">Deletar</a>
+        </li>
+        {% empty %}
+        <li>Nenhum aluno matriculado neste curso.</li>
+        {% endfor %}
+    </ul>
+
+
+</body>
+
+</html>
+{% endblock %}

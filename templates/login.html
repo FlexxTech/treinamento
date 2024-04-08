@@ -1,0 +1,32 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'img/login2.png' %}" alt="Background image">
+        </div>
+        <div class="form-container">
+            <h2>Bem-vindo de volta!</h2>
+            <p>Na nossa empresa de treinamentos, estamos comprometidos em oferecer uma experiência educacional de
+                qualidade, adaptada às necessidades individuais de nossos clientes.</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ login_form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}
